@@ -1,0 +1,46 @@
+@page
+@model CreateUserModel
+@using HomeWork.Models
+@{
+    ViewData["Title"] = "Create User";
+}
+
+<div class="container w-50">
+    <form method="POST" asp-validation-summary="ModelOnly">
+        <div class="form-group">
+            <label asp-for="UserModel.Fio"></label>
+            <input asp-for="UserModel.Fio" class="form-control" />
+            <span asp-validation-for="UserModel.Fio" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="UserModel.Birthday"></label>
+            <input type="date" asp-for="UserModel.Birthday" class="form-control" />
+            <span asp-validation-for="UserModel.Birthday" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="UserModel.City"></label>
+            <input asp-for="UserModel.City" class="form-control" />
+            <span asp-validation-for="UserModel.City" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="UserModel.Gender"></label>
+            <select asp-for="UserModel.Gender" asp-items="Html.GetEnumSelectList<Gender>()"
+                class="form-control"></select>
+            <span asp-validation-for="UserModel.Gender" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="UserModel.Phone"></label>
+            <input type="tel" asp-for="UserModel.Phone" class="form-control" />
+            <span asp-validation-for="UserModel.Phone" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="UserModel.Email"></label>
+            <input type="email" asp-for="UserModel.Email" class="form-control" />
+            <span asp-validation-for="UserModel.Email" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-outline-primary">Submit</button>
+        </div>
+    </form>
+</div>
