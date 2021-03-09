@@ -1,0 +1,33 @@
+name: Build and deploy ASP.Net Core app to Azure Web App - homework30990
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@master
+
+    - name: Set up .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '5.0.x'
+
+    - name: Build with dotnet
+      run: dotnet build --configuration Debug
+
+    - name: dotnet publish
+      run: dotnet publish -c Debug -o ${{env.DOTNET_ROOT}}/myapp
+
+    - name: Deploy to Azure Web App
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'homework30990'
+        slot-name: 'production'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_d371480814e546b597d405c60e2811d8 }}
+        package: ${{env.DOTNET_ROOT}}/myapp 
