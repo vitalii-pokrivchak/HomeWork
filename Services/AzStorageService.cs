@@ -17,14 +17,15 @@ namespace HomeWork.Services
 
         public async Task UploadData(string data)
         {
+            Guid key = Guid.NewGuid();
             BlobContainerClient client = new BlobContainerClient(_configuration["Azure:Storage:ConnectionString"], _container);
             if (!Directory.Exists("./Storage"))
             {
                 Directory.CreateDirectory("./Storage");
             }
-            await File.AppendAllTextAsync($"./Storage/blob.json", data);
-            using FileStream stream = File.OpenRead($"./Storage/blob.json");
-            await client.UploadBlobAsync($"blob.json", stream);
+            File.WriteAllText($"./Storage/blob-{key}.json", data);
+            using FileStream stream = File.OpenRead($"./Storage/blob-{key}.json");
+            await client.UploadBlobAsync($"blob-{key}.json", stream);
         }
     }
 }
