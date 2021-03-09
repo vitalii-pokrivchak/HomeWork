@@ -1,4 +1,4 @@
-name: Build and deploy ASP.Net Core app to Azure Web App - homework30990
+name: Build and deploy ASP.NET Core app - homework30990
 
 on:
   push:
