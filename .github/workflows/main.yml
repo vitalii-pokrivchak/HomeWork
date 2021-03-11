@@ -21,7 +21,7 @@ jobs:
         run: |
           dotnet tool install --global dotnet-ef
           dotnet tool restore
-          dotnet ef database update -c ApplicationDbContext -p HomeWork
+          dotnet ef database update -c ApplicationDbContext
         env:
           ASPNETCORE_ENVIRONMENT: Development
       - name: Build with dotnet
