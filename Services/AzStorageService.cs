@@ -18,7 +18,7 @@ namespace HomeWork.Services
         public async Task UploadData(Stream stream)
         {
             Guid key = Guid.NewGuid();
-            BlobContainerClient client = new BlobContainerClient(_configuration["Azure:Storage:ConnectionString"], _container);
+            BlobContainerClient client = new BlobContainerClient(_configuration.GetConnectionString("AzureStorage"), _container);
             await client.UploadBlobAsync($"users-{key}.json", stream);
         }
     }

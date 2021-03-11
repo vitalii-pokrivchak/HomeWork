@@ -45,7 +45,7 @@ namespace HomeWork.Pages
                 }
                 catch (DbUpdateConcurrencyException e)
                 {
-                    _logger.LogError(new EventId(1000, "CreateUserModel"), e, "CreateUserModel exception");
+                    _logger.LogError(e.Message);
                 }
             }
             return Page();
@@ -56,7 +56,10 @@ namespace HomeWork.Pages
             var users = await _context.Users.ToListAsync();
             if (users.Count > 0)
             {
-                var json = JsonSerializer.Serialize<List<User>>(users);
+                var json = JsonSerializer.Serialize<List<User>>(users,new JsonSerializerOptions{
+                    Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
+                    PropertyNameCaseInsensitive = true,
+                });
                 var stream = new MemoryStream(await GetUserInStream(json));
                 await _service.UploadData(stream);
                 return RedirectToPage("Index");
