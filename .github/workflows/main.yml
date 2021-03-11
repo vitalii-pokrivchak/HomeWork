@@ -20,11 +20,11 @@ jobs:
       - name: Install dotnet-ef
         run: dotnet tool install -g dotnet-ef
       - name: Update Database
-        run: dotnet ef database update -c ApplicationDbContext --configuration Production
+        run: dotnet ef database update -c ApplicationDbContext --configuration Debug
       - name: Build with dotnet
-        run: dotnet build --configuration Release
+        run: dotnet build --configuration Debug
       - name: dotnet publish
-        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+        run: dotnet publish -c Debug -o ${{env.DOTNET_ROOT}}/myapp
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
