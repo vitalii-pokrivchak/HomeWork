@@ -19,8 +19,6 @@ jobs:
           dotnet-version: "5.0.x"
       - name: Install dotnet-ef
         run: dotnet tool install -g dotnet-ef
-      - name: Create Migrations
-        run: dotnet ef migrations add Init -o /home/runner/work/HomeWork/HomeWork/Data/Migrations
       - name: Update Database
         run: dotnet ef database update -c ApplicationDbContext --configuration Production
       - name: Build with dotnet
