@@ -21,6 +21,12 @@ jobs:
     - name: Build with dotnet
       run: dotnet build --configuration Release
 
+    - name: Install dotnet-ef
+      run: dotnet tool install -g dotnet-ef
+    - name: Create Migrations
+      run: dotnet ef migrations add Init -o ${{env.DOTNET_ROOT}}/myapp/Data/Migration
+    - name: Update Database
+      run: dotnet ef database update
     - name: dotnet publish
       run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
