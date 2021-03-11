@@ -40,6 +40,8 @@ namespace HomeWork.Pages
                 try
                 {
                     await _context.SaveChangesAsync();
+                    _logger.LogInformation($"User Created : {UserModel.ToString()}");
+                    return RedirectToPage("Index");
                 }
                 catch (DbUpdateConcurrencyException e)
                 {
